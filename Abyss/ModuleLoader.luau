@@ -8,10 +8,11 @@ local function LoadModule(Path)
   if not LoadstringRes then
     return nil
   end
+  print(LoadstringRes)
 
   local Success, Res = pcall(LoadstringRes)
   if Success then
-    print("hi")
+    print(Res)
     return Res
   end
 
