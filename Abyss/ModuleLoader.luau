@@ -11,6 +11,7 @@ local function LoadModule(Path)
 
   local Success, Res = pcall(LoadstringRes)
   if Success then
+    print("hi")
     return Res
   end
 
@@ -20,10 +21,10 @@ end
 for _, Mod in pairs(Modules) do
   local LoadedModule = LoadModule(Mod)
   if LoadedModule ~= nil then
-    table.insert(LoadedMods, LoadedModule)
+    LoadedMods[Mod] = LoadedModule
   end
 end
 
-task.wait()
+task.wait(1)
 
 return LoadedMods
