@@ -88,3 +88,5 @@ function InventoryModule.HookHotbar()
 		warn("[ KODAK ] - Inventory Module Setup!")
 	end)
 end
+
+return InventoryModule
