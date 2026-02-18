@@ -47,12 +47,12 @@ local function RemoveLoadedFishById(Id)
 end
 
 local function AddFishItem(Child)
-	print(Child.Name)
 	if not Child:IsA("Model") then
 		return
 	end
 
-	if #Child.Name >= 10 then -- Temp filter so random models dont get in
+	if #Child.Name ~= 32 then -- Temp filter so random models dont get in
+		print(#Child.Name)
 		return
 	end
 
