@@ -185,6 +185,31 @@ local function RefreshPlayerCharacters()
 	end
 end
 
+function WorldModule.GetClosestFishToPart(Part)
+	if typeof(Part) ~= "Instance" or not Part:IsA("BasePart") then
+		return nil
+	end
+
+	local ClosestEntry = nil
+	local ClosestDistance = math.huge
+
+	for _, Entry in ipairs(WorldModule.LoadedFish) do
+		local Model = WorldModule.Misc.Fish:FindFirstChild(Entry.ID)
+		if Model and Model:IsA("Model") then
+			local Pivot = Model.PrimaryPart or Model:FindFirstChildWhichIsA("BasePart")
+			if Pivot then
+				local Distance = (Pivot.Position - Part.Position).Magnitude
+				if Distance < ClosestDistance then
+					ClosestDistance = Distance
+					ClosestEntry = Entry
+				end
+			end
+		end
+	end
+
+	return ClosestEntry, ClosestDistance
+end
+
 function WorldModule.Setup(Workspace, ReplicatedStorage, FishModule)
 	WorldModule.Misc.FishModule = FishModule
 	WorldModule.Misc.Workspace = Workspace
