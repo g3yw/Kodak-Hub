@@ -218,6 +218,8 @@ function WorldModule.HookWorld()
 		game:GetService("Players").PlayerRemoving:Connect(function()
 			RefreshPlayerCharacters() -- Clean up so we dont keep random left/dead players in da table
 		end)
+
+		warn("[ KODAK ] - World Module Setup!")
 	end)
 end
 
