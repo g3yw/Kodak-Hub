@@ -47,6 +47,7 @@ local function RemoveLoadedFishById(Id)
 end
 
 local function AddFishItem(Child)
+	print(Child.Name)
 	if not Child:IsA("Model") then
 		return
 	end
