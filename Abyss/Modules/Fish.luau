@@ -1,3 +1,5 @@
+-- Updated for place version : 524.
+
 return {
     ["Pompano"] = {
         ["config"] = {
