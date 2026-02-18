@@ -1,6 +1,6 @@
 -- Written 17/02/2026, Universal script to load all modules in Modules folder.
 
-local Modules = {"Inventory", "Fish", "World"} -- Put module name w/o the .luau here when u add it to the Modules folder.
+local Modules = {"Inventory", "Fish", "World", "Teleport"} -- Put module name w/o the .luau here when u add it to the Modules folder.
 local LoadedMods = {}
 
 local function LoadModule(Path)
