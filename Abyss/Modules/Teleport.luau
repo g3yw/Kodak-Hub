@@ -9,6 +9,8 @@ local TeleportModule = {
 
 function TeleportModule.Setup(LocalPlayer)
     TeleportModule.Misc.LocalPlayer = LocalPlayer
+
+    warn("[ KODAK ] - Teleport Module Setup!")
 end
 
 function TeleportModule.TeleportVector3(Position, Time)
