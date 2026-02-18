@@ -10,8 +10,7 @@ local WorldModule = {
 		Debris = nil
 	},
 	PlayerCharacters = {},
-	LoadedFish = {},
-	Teleports = {} -- TODO, TELELPORT POSITIONS FOR NOTABLE POI
+	LoadedFish = {}
 }
 
 local function FindFishConfigByName(FishName)
