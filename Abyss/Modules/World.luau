@@ -29,6 +29,7 @@ local function AddOrUpdateFish(Entry)
 			Item.Health = Entry.Health
 			Item.Rarity = Entry.Rarity
 			Item.BasePrice = Entry.BasePrice
+			Item.Model = Entry.Model
 			return
 		end
 	end
@@ -98,6 +99,7 @@ local function AddFishItem(Child)
 
 	AddOrUpdateFish({
 		ID = Child.Name,
+		Model = Child,
 		Name = FishName,
 		Health = HealthValue,
 		Rarity = RarityValue,
@@ -194,8 +196,8 @@ function WorldModule.GetClosestFishToPart(Part)
 	local ClosestDistance = math.huge
 
 	for _, Entry in ipairs(WorldModule.LoadedFish) do
-		local Model = WorldModule.Misc.Fish:FindFirstChild(Entry.ID)
-		if Model and Model:IsA("Model") then
+		local Model = Entry.Model
+		if Model and Model.Parent then
 			local Pivot = Model.PrimaryPart or Model:FindFirstChildWhichIsA("BasePart")
 			if Pivot then
 				local Distance = (Pivot.Position - Part.Position).Magnitude
@@ -249,5 +251,3 @@ function WorldModule.HookWorld()
 end
 
 return WorldModule
-
-
