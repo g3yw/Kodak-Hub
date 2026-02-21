@@ -212,6 +212,58 @@ function WorldModule.GetClosestFishToPart(Part)
 	return ClosestEntry, ClosestDistance
 end
 
+function WorldModule.GetClosestFishModelsByName(Part, FishNames)
+	if typeof(Part) ~= "Instance" or not Part:IsA("BasePart") then
+		return {}
+	end
+
+	if type(FishNames) ~= "string" and type(FishNames) ~= "table" then
+		return {}
+	end
+
+	local NameLookup = {}
+
+	if type(FishNames) == "string" then
+		NameLookup[FishNames] = true
+	else
+		for _, Name in ipairs(FishNames) do
+			if type(Name) == "string" then
+				NameLookup[Name] = true
+			end
+		end
+	end
+
+	local Results = {}
+
+	for _, Entry in ipairs(WorldModule.LoadedFish) do
+		if NameLookup[Entry.Name] then
+			local Model = Entry.Model
+			if Model and Model.Parent then
+				local Pivot = Model.PrimaryPart or Model:FindFirstChildWhichIsA("BasePart")
+				if Pivot then
+					local Distance = (Pivot.Position - Part.Position).Magnitude
+
+					table.insert(Results, {
+						Model = Model,
+						Distance = Distance
+					})
+				end
+			end
+		end
+	end
+
+	table.sort(Results, function(a, b)
+		return a.Distance < b.Distance
+	end)
+
+	local ModelsOnly = {}
+	for _, Data in ipairs(Results) do
+		table.insert(ModelsOnly, Data.Model)
+	end
+
+	return ModelsOnly
+end
+
 function WorldModule.Setup(Workspace, ReplicatedStorage, FishModule)
 	WorldModule.Misc.FishModule = FishModule
 	WorldModule.Misc.Workspace = Workspace
